@@ -3,7 +3,7 @@ import React from 'react';
 const Home = () => {
     return (
         <div>
-            Welcome
+            <span className='menu-header'>Welcome</span>
         </div>
     )
 }

@@ -1,6 +1,5 @@
 @import './variables.scss';
 
-
 .login-form{
     width:450px;
     margin: auto;
@@ -24,7 +23,8 @@
     background-color:$theme-color-dark;
     border-radius: 5px;
     padding: 10px;
-    color:#fff
+    color:#fff;
+    font-weight: 600;
     // width: 300px;
   }
 

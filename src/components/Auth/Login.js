@@ -19,7 +19,7 @@ const Login = () => {
     return (
         <div className='login-form'>
           {/* {isLoading ? 'logging in...' : null} */}
-          <p className="h2">Login</p>
+          <p className="menu-header">Login</p>
 
           <form onSubmit={login_form}>
             <div className="mb-3">
@@ -49,7 +49,6 @@ const Login = () => {
             </button>
           </form>
           <br/>
-
 
         </div>
     )

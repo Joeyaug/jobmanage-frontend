@@ -38,7 +38,7 @@ const Register = () => {
 
             {props => (
                 <Form className='login-form'>
-                    <p className="h2">Sign Up</p>
+                    <p className="menu-header">Sign Up</p>
 
                     <FormikTextInput name='first_name' label='First Name' />
                     <FormikTextInput name='last_name' label='Last Name' />
@@ -50,7 +50,7 @@ const Register = () => {
                         <button className="custom-button" type='submit'>{props.isSubmitting ? 'Loading...' : 'Register'}</button>   
                     </div>
                     <br/>
-                    <Link to='/login'>Already have an account?</Link>
+                    <Link style={{fontSize:14, textDecoration: 'none'}} className='menu-header text-muted' to='/login'>Already have an account?</Link>
                 </Form>
                 )}
 

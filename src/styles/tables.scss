@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+.table-div{
+    overflow: scroll;
+    margin: auto;
+    width: 80%;
+    margin-top: 20px;
+}
+
+.custom-table{
+    
+    margin: auto;
+    min-width: 600px;
+    thead{
+        font-weight: 600;
+    }
+    td{
+        padding: 4px;
+        border-bottom: 1px solid $theme-color-dark;
+        padding-right: 10px;
+    }
+}
+
+@media (max-width: 866px) { 
+   .table-div{
+       width: 100%;
+   }
+}

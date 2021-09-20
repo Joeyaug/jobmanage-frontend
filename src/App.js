@@ -5,12 +5,17 @@ import Register from './components/Auth/Register';
 import { ErrorMessage, SuccessMessage } from './components/Other/SystemMessags';
 import { error_message, success_message, user_state } from "./global-state"
 import TopNav from './components/Navbar/TopNav';
+import Home from './components/LoggedIn/Home';
+import JobsPage from './components/LoggedIn/Jobs/JobsPage';
 
 import './styles/index.scss'
 import './styles/natives.scss'
 import './styles/layout.scss'
 import './styles/forms.scss'
-import Home from './components/LoggedIn/Home';
+import './styles/tables.scss'
+import AddJob from './components/LoggedIn/Jobs/Job/AddJob';
+import JobDetail from './components/LoggedIn/Jobs/Job/JobDetail';
+
 
 const NeedToAuthenticateRoute = ({ path, component}) => {
   const user = useRecoilValue(user_state)
@@ -23,7 +28,7 @@ const LoggedOutRoute = ({path, component}) => {
   const user = useRecoilValue(user_state)
   if(!user)
     return <Route exact path={path} component={component}/>
-  return <Redirect to='/'/>
+  return <Redirect to='/jobs'/>
 }
 
 
@@ -44,7 +49,10 @@ function App() {
       <Switch>
         <LoggedOutRoute exact path={'/login'} component={Login} />
         <LoggedOutRoute exact path={'/register'} component={Register} />
-        <NeedToAuthenticateRoute exact path={'/'} component={Home} />
+        {/* <NeedToAuthenticateRoute exact path={'/'} component={Home} /> */}
+        <NeedToAuthenticateRoute exact path={'/jobs'} component={JobsPage} />
+        <NeedToAuthenticateRoute exact path={'/jobs/add'} component={AddJob} />
+        <NeedToAuthenticateRoute exact path={'/jobs/:id'} component={JobDetail} />
       </Switch>
       </div>
     </div>
