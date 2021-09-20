@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { useSetRecoilState } from "recoil";
 import { error_message, success_message, user_state } from "../../global-state";
-// import { handle_login, save_mb_paymail } from "../../services/user";
+import { handle_login } from "../../services/user";
 
 
 const  useLogin = () => {
@@ -10,17 +10,14 @@ const  useLogin = () => {
   const set_error = useSetRecoilState(error_message)
   const set_success = useSetRecoilState(success_message)
 
-  return  useMutation((payload)=>console.log(payload), {
+  return  useMutation((payload)=>handle_login(payload), {
       onSuccess: data => {
         set_user(data)
         set_success('Successfully logged in!')
         window.localStorage.setItem('token',data.token)
-        localStorage.setItem('auth-token', data.money_button.auth_token)
         setTimeout(() => {
           set_success('')
         }, 4000);
-        window.location.reload()
-
       },
       onError: () => {
         set_error('Invalid credentials!')

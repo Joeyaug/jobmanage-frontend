@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { useMutation } from "react-query";
 import { useSetRecoilState } from "recoil";
 import { error_message, success_message, user_state } from "../../global-state";
-// import { handle_register, platform_paymail, save_mb_paymail } from "../../services/user";
-
+import { handle_register } from "../../services/user";
 
 
 const useRegister = () => {
@@ -11,11 +9,11 @@ const useRegister = () => {
   const set_success = useSetRecoilState(success_message)
   const set_user = useSetRecoilState(user_state)
 
-  return  useMutation((payload)=>console.log(payload), {
+  return  useMutation((payload)=>handle_register(payload), {
       onSuccess: data => {
 
         window.localStorage.setItem("token", data.token);
-        set_user(data);
+        set_user(data)
         
         set_success('Successfully registered!')
         setTimeout(() => {

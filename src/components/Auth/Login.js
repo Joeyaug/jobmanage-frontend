@@ -5,11 +5,15 @@ import { useField } from '../../customHooks/Other/useField'
 const Login = () => {
     const email = useField('email')
     const password = useField('password')
-    const login_mutation = useLogin()
+    const { mutate: do_login, isLoading, isSuccess} = useLogin()
 
     const login_form = (e) => {
         e.preventDefault()
-        login_mutation.mutate({email, password})
+        const payload = {
+            email: email.value,
+            password: password.value
+        }
+        do_login(payload)
     }
 
     return (
@@ -40,7 +44,9 @@ const Login = () => {
 
             </div>
         
-            <button type="submit" className="custom-button">Login</button>
+            <button disabled={isLoading} type="submit" className="custom-button">
+              {isLoading ? 'Loading...' : 'Login'}
+            </button>
           </form>
           <br/>
 

@@ -10,11 +10,12 @@ import './styles/index.scss'
 import './styles/natives.scss'
 import './styles/layout.scss'
 import './styles/forms.scss'
+import Home from './components/LoggedIn/Home';
 
 const NeedToAuthenticateRoute = ({ path, component}) => {
   const user = useRecoilValue(user_state)
   if(!user)
-    return <Redirect to='/'/>
+    return <Redirect to='/login'/>
   return <Route exact path={path} component={component}/>
 }
 
@@ -22,7 +23,7 @@ const LoggedOutRoute = ({path, component}) => {
   const user = useRecoilValue(user_state)
   if(!user)
     return <Route exact path={path} component={component}/>
-  return <Redirect to='/js/approvallist'/>
+  return <Redirect to='/'/>
 }
 
 
@@ -43,6 +44,7 @@ function App() {
       <Switch>
         <LoggedOutRoute exact path={'/login'} component={Login} />
         <LoggedOutRoute exact path={'/register'} component={Register} />
+        <NeedToAuthenticateRoute exact path={'/'} component={Home} />
       </Switch>
       </div>
     </div>
