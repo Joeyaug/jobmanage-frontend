@@ -1,14 +1,16 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
+import useDeleteJob from '../../../../customHooks/JobHooks/useDeleteJob';
 import useJobDetails from '../../../../customHooks/JobHooks/useJobDetail';
 import usePunchIn from '../../../../customHooks/PunchHook/usePunchIn';
 import usePunchOut from '../../../../customHooks/PunchHook/usePunchOut';
 
 const JobDetail = () => {
-
+    const history = useHistory()
     const job_id = useParams().id
     const { data: job_detail, isLoading, isFetching} = useJobDetails(job_id)
+    const { mutate: do_delete_job, isLoading: deleting, isSuccess: deleted} = useDeleteJob()
     const { mutate: do_punch_in, isLoading: punching_in, isSuccess: punched_in} = usePunchIn()
     const { mutate: do_punch_out, isLoading: punching_out, isSuccess: punched_out} = usePunchOut()
     const [ total_hours, set_total_hours] = useState(0)
@@ -30,7 +32,6 @@ const JobDetail = () => {
     if (isLoading || isFetching){
         return 'loading'
     }
-    console.log(job_detail);
 
     const handle_punch_in = (e) => {
         e.preventDefault()
@@ -41,6 +42,14 @@ const JobDetail = () => {
         do_punch_out(job_id)
     }
 
+    const handle_delete_job = (e) => {
+        e.preventDefault()
+        const ok = window.confirm('Are you sure?')
+        if (ok){
+            do_delete_job(job_id)
+            history.push('/jobs')
+        }
+    }
    
 
     return (
@@ -64,6 +73,9 @@ const JobDetail = () => {
                       {punching_out ? 'Punching out...' : 'Punch out' } 
                     </button>
                 }
+                <button style={{marginLeft: 20}} onClick={handle_delete_job} className='custom-button'>
+                    {deleting ? 'Deleting...' : 'Delete' } 
+                </button>
             </div>
             <br/><br/>
             <div className='table-div'>

@@ -14,14 +14,17 @@ const JobsPage = () => {
         isFetching,
       } = useMyJobs()
 
-    console.log(jobs_data);
 
     const go_to_add = () => {
         history.push('/jobs/add');
     }
 
-    if (isLoading){
+    if (isLoading || isFetching){
         return 'loading'
+    }
+
+    if(error){
+        window.location.reload()
     }
 
     return (
@@ -45,7 +48,11 @@ const JobsPage = () => {
                 {jobs_data.map(job => (
                     <tr key={job.id}>
                     <td>{job.title}</td>
-                    <td>{job.punched_in ? <span className='success-badge'>Punched in</span> : moment().calendar()}</td>
+                    <td>{
+                        job.punched_in 
+                        ? <span className='success-badge'>Punched in</span> 
+                        :job.updatedAt === job.createdAt ? 'No punches yet' : moment(job.updatedAt).calendar()
+                        }</td>
                     <td >
                         <CallMadeIcon style={{cursor:'pointer'}} onClick={()=> history.push(`/jobs/${job.id}`)}/>
                     </td>

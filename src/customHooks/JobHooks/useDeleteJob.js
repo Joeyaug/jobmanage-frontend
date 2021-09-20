@@ -1,27 +1,25 @@
-import { useMutation } from "react-query";
-import { useHistory } from "react-router-dom";
+import { useMutation, useQueryClient } from "react-query";
 import { useSetRecoilState } from "recoil";
 import { error_message, success_message } from "../../global-state";
-import { handle_register } from "../../services/user";
+import { delete_job } from "../../services/job";
 
 
-const useRegister = () => {
-  const history = useHistory()
+const  useDeleteJob = () => {
+
   const set_error = useSetRecoilState(error_message)
   const set_success = useSetRecoilState(success_message)
-
-  return  useMutation((payload)=>handle_register(payload), {
+  const queryClient = useQueryClient()
+  
+  return  useMutation((job_id)=>delete_job(job_id), {
       onSuccess: data => {
-
-        history.push('/login')
-        set_success('Successfully registered!')
+        queryClient.invalidateQueries('get_my_jobs')
+        set_success('Successfully deleted job!')
         setTimeout(() => {
           set_success('')
         }, 4000);
-
       },
       onError: () => {
-        set_error('User with this email already exists!')
+        set_error('Problem deleting job! Please try again later!')
         setTimeout(() => {
           set_error('')
         }, 4000);
@@ -29,4 +27,4 @@ const useRegister = () => {
   })
 }
 
-export default useRegister;
+export default useDeleteJob;

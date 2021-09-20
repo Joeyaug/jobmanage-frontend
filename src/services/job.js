@@ -32,6 +32,14 @@ export const get_job_detail = async (id) => {
     return data
 }
 
+export const delete_job = async (job_id) => {
+    const config = {
+        headers: { authorization: get_token()},
+    }
+    const {data} = await axios.delete(`${base_url}/jobs/${job_id}`, config)
+    return data
+}
+
 export const punch_in = async (job_id) => {
     const config = {
         headers: { authorization: get_token()},

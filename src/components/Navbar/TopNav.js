@@ -8,7 +8,7 @@ const TopNav = () => {
 
     const handle_logout = () => {
       set_user(null);
-      window.localStorage.clear('token');
+      window.localStorage.clear();
     }
 
     return (
