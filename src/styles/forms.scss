@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+
+.login-form{
+    width:450px;
+    margin: auto;
+    button{
+        width: 100%;
+    }
+}
+
+.form-label{
+    font-weight: 600;
+}
+
+.validation-error{
+    color: $error-message-color;
+    font-weight: 500;
+    margin: 4px;
+}
+
+.custom-button{
+    border: none;
+    background-color:$theme-color-dark;
+    border-radius: 5px;
+    padding: 10px;
+    color:#fff
+    // width: 300px;
+  }
+
+@media (max-width: 866px) { 
+    .login-form{
+        width:90%;
+    }
+}

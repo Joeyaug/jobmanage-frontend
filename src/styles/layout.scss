@@ -1,0 +1,23 @@
+.main-container{
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-container{
+    background-color: red;
+    height: 50px;
+    
+}
+
+.nav-items{
+    background-color: rgb(163, 152, 139);
+    margin-top: 15px;
+}
+
+.content-container{
+    // flex: 1;
+    background-color: antiquewhite;
+    margin-top: 20px;
+
+}
